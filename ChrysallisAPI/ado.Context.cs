@@ -29,8 +29,9 @@ namespace ChrysallisAPI
         public virtual DbSet<Asistir> Asistir { get; set; }
         public virtual DbSet<Comunidades> Comunidades { get; set; }
         public virtual DbSet<Documentos> Documentos { get; set; }
-        public virtual DbSet<Eventos> Eventos { get; set; }
         public virtual DbSet<Notificaciones> Notificaciones { get; set; }
         public virtual DbSet<Socios> Socios { get; set; }
+        public virtual DbSet<Comentarios> Comentarios { get; set; }
+        public virtual DbSet<Eventos> Eventos { get; set; }
     }
 }

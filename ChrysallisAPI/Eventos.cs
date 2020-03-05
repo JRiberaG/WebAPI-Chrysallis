@@ -18,6 +18,7 @@ namespace ChrysallisAPI
         public Eventos()
         {
             this.Asistir = new HashSet<Asistir>();
+            this.Comentarios = new HashSet<Comentarios>();
             this.Documentos = new HashSet<Documentos>();
             this.Notificaciones = new HashSet<Notificaciones>();
         }
@@ -30,10 +31,13 @@ namespace ChrysallisAPI
         public Nullable<System.DateTime> fecha_limite { get; set; }
         public byte idComunidad { get; set; }
         public byte idAdmin { get; set; }
+        public double valoracionMedia { get; set; }
     
         public virtual Administradores Administradores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asistir> Asistir { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comentarios> Comentarios { get; set; }
         public virtual Comunidades Comunidades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Documentos> Documentos { get; set; }

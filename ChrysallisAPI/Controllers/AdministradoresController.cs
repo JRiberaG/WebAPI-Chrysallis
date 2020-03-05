@@ -27,12 +27,6 @@ namespace ChrysallisAPI.Controllers
         [ResponseType(typeof(Administradores))]
         public IHttpActionResult GetAdministradores(byte id)
         {
-            //Administradores administradores = db.Administradores.Find(id);
-            //if (administradores == null)
-            //{
-            //    return NotFound();
-            //}
-
             IHttpActionResult resultado;
 
             db.Configuration.LazyLoadingEnabled = false;

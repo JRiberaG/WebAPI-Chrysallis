@@ -19,6 +19,7 @@ namespace ChrysallisAPI
         {
             this.Asistir = new HashSet<Asistir>();
             this.Comunidades1 = new HashSet<Comunidades>();
+            this.Comentarios = new HashSet<Comentarios>();
         }
     
         public int id { get; set; }
@@ -37,5 +38,7 @@ namespace ChrysallisAPI
         public virtual Comunidades Comunidades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comunidades> Comunidades1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comentarios> Comentarios { get; set; }
     }
 }

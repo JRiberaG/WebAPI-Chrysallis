@@ -17,8 +17,8 @@ namespace ChrysallisAPI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Administradores()
         {
-            this.Eventos = new HashSet<Eventos>();
             this.Comunidades = new HashSet<Comunidades>();
+            this.Eventos = new HashSet<Eventos>();
         }
     
         public byte id { get; set; }
@@ -29,8 +29,8 @@ namespace ChrysallisAPI
         public bool superadmin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Eventos> Eventos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comunidades> Comunidades { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Eventos> Eventos { get; set; }
     }
 }

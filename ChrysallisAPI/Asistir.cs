@@ -17,10 +17,9 @@ namespace ChrysallisAPI
         public int idSocio { get; set; }
         public short idEvento { get; set; }
         public Nullable<byte> valoracion { get; set; }
-        public string comentario { get; set; }
         public short numAsistentes { get; set; }
     
-        public virtual Eventos Eventos { get; set; }
         public virtual Socios Socios { get; set; }
+        public virtual Eventos Eventos { get; set; }
     }
 }

@@ -183,10 +183,14 @@
     <Compile Include="Asistir.cs">
       <DependentUpon>ado.tt</DependentUpon>
     </Compile>
+    <Compile Include="Comentario.cs">
+      <DependentUpon>ado.tt</DependentUpon>
+    </Compile>
     <Compile Include="Comunidades.cs">
       <DependentUpon>ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AdministradoresController.cs" />
+    <Compile Include="Controllers\ComentariosController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SociosController.cs" />

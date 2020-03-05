@@ -10,9 +10,10 @@ namespace ChrysallisAPI
         public static void Register(HttpConfiguration config)
         {
             config.Formatters.Remove(config.Formatters.XmlFormatter);
+
             var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
             json.SerializerSettings.PreserveReferencesHandling =
-                                        Newtonsoft.Json.PreserveReferencesHandling.All;
+                                        Newtonsoft.Json.PreserveReferencesHandling.Objects;
             // Configuración y servicios de API web
 
             // Rutas de API web

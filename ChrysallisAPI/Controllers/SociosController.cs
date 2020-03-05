@@ -19,6 +19,7 @@ namespace ChrysallisAPI.Controllers
         // GET: api/Socios
         public IQueryable<Socios> GetSocios()
         {
+            db.Configuration.LazyLoadingEnabled = false;
             return db.Socios;
         }
 
@@ -26,6 +27,8 @@ namespace ChrysallisAPI.Controllers
         [ResponseType(typeof(Socios))]
         public IHttpActionResult GetSocios(int id)
         {
+            db.Configuration.LazyLoadingEnabled = false;
+
             Socios socios = db.Socios.Find(id);
             if (socios == null)
             {

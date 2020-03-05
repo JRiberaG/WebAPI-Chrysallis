@@ -19,6 +19,7 @@ namespace ChrysallisAPI.Controllers
         // GET: api/Eventos
         public IQueryable<Eventos> GetEventos()
         {
+            db.Configuration.LazyLoadingEnabled = false;
             return db.Eventos;
         }
 
