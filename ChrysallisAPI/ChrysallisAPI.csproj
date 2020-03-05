@@ -183,7 +183,7 @@
     <Compile Include="Asistir.cs">
       <DependentUpon>ado.tt</DependentUpon>
     </Compile>
-    <Compile Include="Comentario.cs">
+    <Compile Include="Comentarios.cs">
       <DependentUpon>ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Comunidades.cs">
