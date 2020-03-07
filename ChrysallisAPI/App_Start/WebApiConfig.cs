@@ -14,6 +14,8 @@ namespace ChrysallisAPI
             var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
             json.SerializerSettings.PreserveReferencesHandling =
                                         Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            //json.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
             // Configuración y servicios de API web
 
             // Rutas de API web

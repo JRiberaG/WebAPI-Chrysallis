@@ -17,17 +17,17 @@ namespace ChrysallisAPI.Controllers
         private ChrysallisEntities db = new ChrysallisEntities();
 
         // GET: api/Comentarios
-        public IQueryable<Comentario> GetComentario()
+        public IQueryable<Comentarios> GetComentario()
         {
             db.Configuration.LazyLoadingEnabled = false;
-            return db.Comentario;
+            return db.Comentarios;
         }
 
         // GET: api/Comentarios/5
-        [ResponseType(typeof(Comentario))]
+        [ResponseType(typeof(Comentarios))]
         public IHttpActionResult GetComentario(short id)
         {
-            Comentario comentario = db.Comentario.Find(id);
+            Comentarios comentario = db.Comentarios.Find(id);
             if (comentario == null)
             {
                 return NotFound();
@@ -43,8 +43,8 @@ namespace ChrysallisAPI.Controllers
 
             db.Configuration.LazyLoadingEnabled = false;
 
-            List<Comentario> comentarios =
-                (from c in db.Comentario
+            List<Comentarios> comentarios =
+                (from c in db.Comentarios
                  where c.idEvento == idEvento
                  select c).ToList();
 
@@ -61,7 +61,7 @@ namespace ChrysallisAPI.Controllers
 
         // PUT: api/Comentarios/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutComentario(short id, Comentario comentario)
+        public IHttpActionResult PutComentario(short id, Comentarios comentario)
         {
             if (!ModelState.IsValid)
             {
@@ -95,15 +95,15 @@ namespace ChrysallisAPI.Controllers
         }
 
         // POST: api/Comentarios
-        [ResponseType(typeof(Comentario))]
-        public IHttpActionResult PostComentario(Comentario comentario)
+        [ResponseType(typeof(Comentarios))]
+        public IHttpActionResult PostComentario(Comentarios comentario)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Comentario.Add(comentario);
+            db.Comentarios.Add(comentario);
 
             try
             {
@@ -125,16 +125,16 @@ namespace ChrysallisAPI.Controllers
         }
 
         // DELETE: api/Comentarios/5
-        [ResponseType(typeof(Comentario))]
+        [ResponseType(typeof(Comentarios))]
         public IHttpActionResult DeleteComentario(short id)
         {
-            Comentario comentario = db.Comentario.Find(id);
+            Comentarios comentario = db.Comentarios.Find(id);
             if (comentario == null)
             {
                 return NotFound();
             }
 
-            db.Comentario.Remove(comentario);
+            db.Comentarios.Remove(comentario);
             db.SaveChanges();
 
             return Ok(comentario);
@@ -151,7 +151,7 @@ namespace ChrysallisAPI.Controllers
 
         private bool ComentarioExists(short id)
         {
-            return db.Comentario.Count(e => e.idEvento == id) > 0;
+            return db.Comentarios.Count(e => e.idEvento == id) > 0;
         }
     }
 }

@@ -17,10 +17,16 @@ namespace ChrysallisAPI.Controllers
         private ChrysallisEntities db = new ChrysallisEntities();
 
         // GET: api/Eventos
-        public IQueryable<Eventos> GetEventos()
+        public List<Eventos> GetEventos()
         {
             db.Configuration.LazyLoadingEnabled = false;
-            return db.Eventos;
+
+            List<Eventos> eventos = (
+                from e in db.Eventos
+                select e).ToList();
+
+
+            return eventos;
         }
 
         // GET: api/Eventos/5
