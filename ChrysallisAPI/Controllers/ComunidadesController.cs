@@ -19,6 +19,7 @@ namespace ChrysallisAPI.Controllers
         // GET: api/Comunidades
         public IQueryable<Comunidades> GetComunidades()
         {
+            db.Configuration.LazyLoadingEnabled = false;
             return db.Comunidades;
         }
 
@@ -26,6 +27,8 @@ namespace ChrysallisAPI.Controllers
         [ResponseType(typeof(Comunidades))]
         public IHttpActionResult GetComunidades(byte id)
         {
+            db.Configuration.LazyLoadingEnabled = false;
+
             Comunidades comunidades = db.Comunidades.Find(id);
             if (comunidades == null)
             {

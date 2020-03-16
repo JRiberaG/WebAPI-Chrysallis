@@ -17,10 +17,23 @@ namespace ChrysallisAPI.Controllers
         private ChrysallisEntities db = new ChrysallisEntities();
 
         // GET: api/Socios
-        public IQueryable<Socios> GetSocios()
+        public List<Socios> GetSocios()
         {
+            /*
             db.Configuration.LazyLoadingEnabled = false;
-            return db.Socios;
+
+            return db.Socios;*/
+            db.Configuration.LazyLoadingEnabled = false;
+
+            List<Socios> socios = (
+                from s in db.Socios
+               // .Include("Comunidades")
+               // .Include("Comunidades1")
+                //.Include("Comentarios")
+                select s).ToList();
+
+
+            return socios;
         }
 
         // GET: api/Socios/5
@@ -29,7 +42,15 @@ namespace ChrysallisAPI.Controllers
         {
             db.Configuration.LazyLoadingEnabled = false;
 
-            Socios socios = db.Socios.Find(id);
+            //Socios socios = db.Socios.Find(id);
+            Socios socios = (
+                from s in db.Socios
+                    .Include("Comunidades")
+                    .Include("Comunidades1")
+                    .Include("Asistir")
+                where s.id == id
+                select s).FirstOrDefault();
+
             if (socios == null)
             {
                 return NotFound();
@@ -37,6 +58,64 @@ namespace ChrysallisAPI.Controllers
 
             return Ok(socios);
         }
+
+        // GET: api/Socios/5
+        [ResponseType(typeof(Socios))]
+        [Route("api/Socios/{id}/{completo}")]
+        public IHttpActionResult GetSocios(int id, bool completo)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+
+            Socios socios;
+
+            if (completo)
+            {
+                socios = (
+                from s in db.Socios
+                    .Include("Comunidades")
+                    .Include("Comunidades1")
+                    .Include("Asistir")
+                where s.id == id
+                select s).FirstOrDefault();
+            }
+            else
+            {
+                socios = (
+                from s in db.Socios
+                where s.id == id
+                select s).FirstOrDefault();
+            }
+
+            if (socios == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(socios);
+        }
+
+        // GET: api/Socios/prueba@prueba.com
+        [ResponseType(typeof(Socios))]
+        public IHttpActionResult GetSocios(String email)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+
+            Socios socio = db.Socios.Find(email);
+            /*
+            //Socios socios = db.Socios.Find(id);
+            Socios socios = (
+                from s in db.Socios
+                where s.email.Equals(email)
+                select s).FirstOrDefault();
+                */
+            if (socio == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(socio);
+        }
+
 
         // PUT: api/Socios/5
         [ResponseType(typeof(void))]
@@ -72,7 +151,7 @@ namespace ChrysallisAPI.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        /*
         // POST: api/Socios
         [ResponseType(typeof(Socios))]
         public IHttpActionResult PostSocios(Socios socios)
@@ -102,7 +181,7 @@ namespace ChrysallisAPI.Controllers
             db.SaveChanges();
 
             return Ok(socios);
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {

@@ -23,6 +23,25 @@ namespace ChrysallisAPI.Controllers
 
             List<Eventos> eventos = (
                 from e in db.Eventos
+                .Include("Comunidades")
+                select e).ToList();
+
+
+            return eventos;
+        }
+
+        // GET: api/Eventos/EventosByComunidad/5
+        //Le indicamos la ruta de la API para
+        [Route("api/Eventos/EventosByComunidad/{idComunidad}")]
+        public List<Eventos> GetEventosByComunidad(byte idComunidad)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+
+            List<Eventos> eventos = (
+                from e in db.Eventos
+                .Include("Comunidades")
+                .Include("Comentarios")
+                where e.idComunidad == idComunidad
                 select e).ToList();
 
 
@@ -33,7 +52,18 @@ namespace ChrysallisAPI.Controllers
         [ResponseType(typeof(Eventos))]
         public IHttpActionResult GetEventos(short id)
         {
-            Eventos eventos = db.Eventos.Find(id);
+            db.Configuration.LazyLoadingEnabled = false;
+
+            //Eventos eventos = db.Eventos.Find(id);
+            Eventos eventos = (
+               from e in db.Eventos
+               .Include("Comunidades")
+               .Include("Comentarios")
+               .Include("Asistir")
+               .Include("Documentos")
+               where e.id == id
+               select e).FirstOrDefault();
+
             if (eventos == null)
             {
                 return NotFound();

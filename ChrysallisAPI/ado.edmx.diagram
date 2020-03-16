@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="465e5cb458fe4869a48d1ad014a4125c" Name="Diagram1" ZoomLevel="59">
+      <Diagram DiagramId="465e5cb458fe4869a48d1ad014a4125c" Name="Diagram1" ZoomLevel="81">
         <EntityTypeShape EntityType="ChrysallisModel.Administradores" Width="1.5" PointX="2" PointY="9.125" />
         <EntityTypeShape EntityType="ChrysallisModel.Asistir" Width="1.5" PointX="9.625" PointY="12.875" />
         <EntityTypeShape EntityType="ChrysallisModel.Comunidades" Width="1.5" PointX="3" PointY="13" />
@@ -15,15 +15,15 @@
         <AssociationConnector Association="ChrysallisModel.FK_Socios_Comunidad" />
         <AssociationConnector Association="ChrysallisModel.AdministrarComunidad" />
         <AssociationConnector Association="ChrysallisModel.ComunidadesInteresadas" />
-        <EntityTypeShape EntityType="ChrysallisModel.Comentarios" Width="1.5" PointX="9.375" PointY="9.625" />
         <EntityTypeShape EntityType="ChrysallisModel.Eventos" Width="1.5" PointX="4.625" PointY="7.75" />
         <AssociationConnector Association="ChrysallisModel.FK_Eventos_Administradores" />
         <AssociationConnector Association="ChrysallisModel.FK_Asistir_Eventos" />
-        <AssociationConnector Association="ChrysallisModel.FK_Comentario_Eventos" />
-        <AssociationConnector Association="ChrysallisModel.FK_Comentario_Socios" />
         <AssociationConnector Association="ChrysallisModel.FK_Eventos_Comunidad" />
         <AssociationConnector Association="ChrysallisModel.FK_Documentos_Eventos" />
         <AssociationConnector Association="ChrysallisModel.FK_Notificaciones_Eventos" />
+        <EntityTypeShape EntityType="ChrysallisModel.Comentarios" Width="1.5" PointX="9" PointY="10" />
+        <AssociationConnector Association="ChrysallisModel.FK_Comentario_Eventos" />
+        <AssociationConnector Association="ChrysallisModel.FK_Comentario_Socios" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

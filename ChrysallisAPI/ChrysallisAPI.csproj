@@ -190,6 +190,7 @@
       <DependentUpon>ado.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AdministradoresController.cs" />
+    <Compile Include="Controllers\AsistirsController.cs" />
     <Compile Include="Controllers\ComentariosController.cs" />
     <Compile Include="Controllers\ComunidadesController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
