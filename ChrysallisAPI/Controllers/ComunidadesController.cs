@@ -19,6 +19,7 @@ namespace ChrysallisAPI.Controllers
         // GET: api/Comunidades
         public IQueryable<Comunidades> GetComunidades()
         {
+            db.Configuration.LazyLoadingEnabled = false;
             return db.Comunidades;
         }
 
@@ -26,13 +27,23 @@ namespace ChrysallisAPI.Controllers
         [ResponseType(typeof(Comunidades))]
         public IHttpActionResult GetComunidades(byte id)
         {
-            Comunidades comunidades = db.Comunidades.Find(id);
-            if (comunidades == null)
+            db.Configuration.LazyLoadingEnabled = false;
+
+            //Comunidades comunidades = db.Comunidades.Find(id);
+            Comunidades comunidad =
+                (from c in db.Comunidades
+                 //.Include("Socios")   //socios de la CCAA
+                 .Include("Socios1")    //socios interesados en la CCAA
+                 .Include("Eventos")
+                 where c.id == id
+                 select c).FirstOrDefault();
+
+            if (comunidad == null)
             {
                 return NotFound();
             }
 
-            return Ok(comunidades);
+            return Ok(comunidad);
         }
 
         // PUT: api/Comunidades/5

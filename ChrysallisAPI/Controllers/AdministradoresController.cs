@@ -36,7 +36,7 @@ namespace ChrysallisAPI.Controllers
                  where a.id == id
                  select a).FirstOrDefault();
 
-            if(admin == null)
+            if (admin == null)
             {
                 resultado = NotFound();
             }

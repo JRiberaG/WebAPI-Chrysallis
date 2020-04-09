@@ -23,7 +23,7 @@ namespace ChrysallisAPI.Controllers
             return db.Comentarios;
         }
 
-        // GET: api/Comentarios/5
+        /*// GET: api/Comentarios/5
         [ResponseType(typeof(Comentarios))]
         public IHttpActionResult GetComentario(short id)
         {
@@ -34,9 +34,10 @@ namespace ChrysallisAPI.Controllers
             }
 
             return Ok(comentario);
-        }
+        }*/
 
-        // GET: api/Comentarios/5
+        // GET: api/Comentarios/ComentariosByEvento/5
+        [Route("api/Comentarios/ComentariosByEvento/{idEvento}")]
         public IHttpActionResult GetComentarioByEvento(short idEvento)
         {
             IHttpActionResult resultado;
@@ -45,7 +46,32 @@ namespace ChrysallisAPI.Controllers
 
             List<Comentarios> comentarios =
                 (from c in db.Comentarios
+                 .Include("Socios")
                  where c.idEvento == idEvento
+                 select c).ToList();
+
+            if (comentarios == null)
+            {
+                resultado = NotFound();
+            }
+            else
+            {
+                resultado = Ok(comentarios);
+            }
+            return resultado;
+        }
+
+        // GET: api/Comentarios/ComentariosBySocio/5
+        [Route("api/Comentarios/ComentariosBySocio/{idSocio}")]
+        public IHttpActionResult GetComentarioBySocio(int idSocio)
+        {
+            IHttpActionResult resultado;
+
+            db.Configuration.LazyLoadingEnabled = false;
+
+            List<Comentarios> comentarios =
+                (from c in db.Comentarios
+                 where c.idSocio == idSocio
                  select c).ToList();
 
             if (comentarios == null)
