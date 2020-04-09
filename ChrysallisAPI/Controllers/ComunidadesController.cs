@@ -29,13 +29,23 @@ namespace ChrysallisAPI.Controllers
         {
             db.Configuration.LazyLoadingEnabled = false;
 
-            Comunidades comunidades = db.Comunidades.Find(id);
-            if (comunidades == null)
+
+            //Comunidades comunidades = db.Comunidades.Find(id);
+            Comunidades comunidad =
+                (from c in db.Comunidades
+                 //.Include("Socios")   //socios de la CCAA
+                 .Include("Socios1")    //socios interesados en la CCAA
+                 .Include("Eventos")
+                 where c.id == id
+                 select c).FirstOrDefault();
+
+            if (comunidad == null)
+
             {
                 return NotFound();
             }
 
-            return Ok(comunidades);
+            return Ok(comunidad);
         }
 
         // PUT: api/Comunidades/5

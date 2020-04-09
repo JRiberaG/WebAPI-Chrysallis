@@ -11,11 +11,10 @@ namespace ChrysallisAPI
         {
             config.Formatters.Remove(config.Formatters.XmlFormatter);
 
-            var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
-            /*json.SerializerSettings.PreserveReferencesHandling =
-                                        Newtonsoft.Json.PreserveReferencesHandling.Objects;*/
-            json.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
+
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
+
 
             // Configuración y servicios de API web
 

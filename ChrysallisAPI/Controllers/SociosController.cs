@@ -27,9 +27,11 @@ namespace ChrysallisAPI.Controllers
 
             List<Socios> socios = (
                 from s in db.Socios
-               // .Include("Comunidades")
-               // .Include("Comunidades1")
-                //.Include("Comentarios")
+
+                .Include("Comunidades")
+                .Include("Comunidades1")
+                .Include("Comentarios")
+
                 select s).ToList();
 
 

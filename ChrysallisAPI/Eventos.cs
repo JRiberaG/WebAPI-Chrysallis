@@ -9,13 +9,9 @@
 
 namespace ChrysallisAPI
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract(IsReference = false)]
-    [JsonObject(IsReference = true)]
+    
     public partial class Eventos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
