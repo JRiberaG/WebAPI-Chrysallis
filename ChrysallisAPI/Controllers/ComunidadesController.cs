@@ -29,6 +29,7 @@ namespace ChrysallisAPI.Controllers
         {
             db.Configuration.LazyLoadingEnabled = false;
 
+
             //Comunidades comunidades = db.Comunidades.Find(id);
             Comunidades comunidad =
                 (from c in db.Comunidades
@@ -39,6 +40,7 @@ namespace ChrysallisAPI.Controllers
                  select c).FirstOrDefault();
 
             if (comunidad == null)
+
             {
                 return NotFound();
             }

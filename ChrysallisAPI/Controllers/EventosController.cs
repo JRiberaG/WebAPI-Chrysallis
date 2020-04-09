@@ -23,7 +23,9 @@ namespace ChrysallisAPI.Controllers
 
             List<Eventos> eventos = (
                 from e in db.Eventos
+
                 //.Include("Comunidades")
+
                 select e).ToList();
 
 
