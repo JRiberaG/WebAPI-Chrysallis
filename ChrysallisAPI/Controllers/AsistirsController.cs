@@ -36,40 +36,41 @@ namespace ChrysallisAPI.Controllers
             return Ok(asistir);
         }
 
-        // PUT: api/Asistirs/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutAsistir(int id, Asistir asistir)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        /* ELIMINADO este método, no se ha de modificar los asistirs*/
+        //// PUT: api/Asistirs/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutAsistir(int id, Asistir asistir)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != asistir.idSocio)
-            {
-                return BadRequest();
-            }
+        //    if (id != asistir.idSocio)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(asistir).State = EntityState.Modified;
+        //    db.Entry(asistir).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AsistirExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!AsistirExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/Asistirs
         [ResponseType(typeof(Asistir))]
@@ -105,12 +106,23 @@ namespace ChrysallisAPI.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = asistir.idSocio }, asistir);
         }
+         
 
-        // DELETE: api/Asistirs/5
-        [ResponseType(typeof(Asistir))]
-        public IHttpActionResult DeleteAsistir(int id)
+        // MODIFICADO:
+        //  Creado método (copiando cabecera y body del método Delete) para poder eliminar
+        //  asistirs
+        [HttpPost]
+        [Route("api/Asistirs/delete/{idSocio}/{idEvento}")]
+        public IHttpActionResult DeleteAsistir(int idSocio, short idEvento)
         {
-            Asistir asistir = db.Asistir.Find(id);
+            // Modificamos la búsqueda del asistir, la cual por defecto la buscaría por una ID,
+            // pero como no la pk son dos ids (socio y evento), se ha tenido que cambair
+            //Asistir asistir = db.Asistir.Find(id);
+            Asistir asistir =
+                (from a in db.Asistir
+                 where a.idSocio == idSocio && a.idEvento == idEvento
+                 select a).FirstOrDefault();
+            
             if (asistir == null)
             {
                 return NotFound();
@@ -121,6 +133,22 @@ namespace ChrysallisAPI.Controllers
 
             return Ok(asistir);
         }
+
+        //// DELETE: api/Asistirs/5
+        //[ResponseType(typeof(Asistir))]
+        //public IHttpActionResult DeleteAsistir(int id)
+        //{
+        //    Asistir asistir = db.Asistir.Find(id);
+        //    if (asistir == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    db.Asistir.Remove(asistir);
+        //    db.SaveChanges();
+
+        //    return Ok(asistir);
+        //}
 
         protected override void Dispose(bool disposing)
         {

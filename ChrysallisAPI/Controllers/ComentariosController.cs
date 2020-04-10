@@ -135,19 +135,30 @@ namespace ChrysallisAPI.Controllers
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
-                if (ComentarioExists(comentario.idEvento))
+                if (comentarioExiste(comentario.id, comentario.idEvento))
                 {
                     return Conflict();
                 }
+
+                //if (ComentarioExists(comentario.idEvento))
+                //{
+                //    return Conflict();
+                //}
                 else
                 {
-                    throw;
+                    throw new DbUpdateException(ex.Message);
                 }
             }
 
             return CreatedAtRoute("DefaultApi", new { id = comentario.idEvento }, comentario);
+        }
+
+        // Método creado para reemplazar el que viene por defecto al crear la API
+        private bool comentarioExiste(int id, short idEvento)
+        {
+            return db.Comentarios.Count(c => c.id == id && c.idEvento == idEvento) > 0;
         }
 
         // DELETE: api/Comentarios/5
