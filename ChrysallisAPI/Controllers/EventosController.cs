@@ -23,6 +23,7 @@ namespace ChrysallisAPI.Controllers
 
             List<Eventos> eventos = (
                 from e in db.Eventos
+                .Include("Asistir")
 
                 //.Include("Comunidades")
 
@@ -33,7 +34,6 @@ namespace ChrysallisAPI.Controllers
         }
 
         // GET: api/Eventos/EventosByComunidad/5
-        //Le indicamos la ruta de la API para
         [Route("api/Eventos/EventosByComunidad/{idComunidad}")]
         public List<Eventos> GetEventosByComunidad(byte idComunidad)
         {
@@ -74,9 +74,10 @@ namespace ChrysallisAPI.Controllers
             return Ok(eventos);
         }
 
-        // PUT: api/Eventos/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutEventos(short id, Eventos eventos)
+        // NEW UPDATE:
+        [HttpPost]
+        [Route("api/Eventos/update/{id}")]
+        public IHttpActionResult updateEvento(short id, Eventos eventos)
         {
             if (!ModelState.IsValid)
             {
@@ -102,12 +103,47 @@ namespace ChrysallisAPI.Controllers
                 }
                 else
                 {
-                    throw;
+                    return StatusCode(HttpStatusCode.NotAcceptable);
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(HttpStatusCode.OK);
         }
+
+        //// PUT: api/Eventos/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutEventos(short id, Eventos eventos)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    if (id != eventos.id)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    db.Entry(eventos).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!EventosExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/Eventos
         [ResponseType(typeof(Eventos))]

@@ -28,9 +28,9 @@ namespace ChrysallisAPI.Controllers
             List<Socios> socios = (
                 from s in db.Socios
 
-                .Include("Comunidades")
-                .Include("Comunidades1")
-                .Include("Comentarios")
+                //.Include("Comunidades")
+                //.Include("Comunidades1")
+                //.Include("Comentarios")
 
                 select s).ToList();
 
@@ -117,6 +117,37 @@ namespace ChrysallisAPI.Controllers
 
             return Ok(socio);
         }
+
+//        // ================ PENDIENTE DE ARREGLAR ===========
+//        //[HttpGet]
+//        [ResponseType(typeof(Socios))]
+//        [Route("api/Socios/{email}/{password}")]
+//        public IHttpActionResult GetSocios(string email, string password)
+//        {
+//            //bool existe = false;
+
+//            db.Configuration.LazyLoadingEnabled = false;
+
+//            List<Socios> socios =
+//                (from s in db.Socios
+//                 select s).ToList();
+
+//            // Buscamos en la lista recuperada si hay algún socio que tenga ese email y contraseña
+//            Socios socio = socios.FirstOrDefault(s => s.email.Equals(email) && s.contrasenya.Equals(password));
+////            int index = socios.FindIndex(s => s.email.Equals(email) && s.contrasenya.Equals(password));
+
+//            // Si lo encuentro, retornamos un true
+//            if (socio != null)
+//            {
+//                return Ok(socio);
+//            }
+//            else
+//            {
+//                return NotFound();
+//            }
+
+//            //return existe;
+//        }
 
 
         // PUT: api/Socios/5

@@ -20,57 +20,30 @@ namespace ChrysallisAPI.Controllers
         // GET: api/Asistirs
         public IQueryable<Asistir> GetAsistir()
         {
+            db.Configuration.LazyLoadingEnabled = false;
             return db.Asistir;
         }
 
         // GET: api/Asistirs/5
         [ResponseType(typeof(Asistir))]
-        public IHttpActionResult GetAsistir(int id)
+        [Route("api/asistirs/{idSocio}")]
+        public IHttpActionResult GetAsistir(int idSocio)
         {
-            Asistir asistir = db.Asistir.Find(id);
-            if (asistir == null)
+            db.Configuration.LazyLoadingEnabled = false;
+
+            //Asistir asistir = db.Asistir.Find(id);
+            List<Asistir> asistirs =
+                (from a in db.Asistir
+                 where a.idSocio == idSocio
+                 select a).ToList();
+
+            if (asistirs == null || asistirs.Count < 1)
             {
                 return NotFound();
             }
 
-            return Ok(asistir);
+            return Ok(asistirs);
         }
-
-        /* ELIMINADO este método, no se ha de modificar los asistirs*/
-        //// PUT: api/Asistirs/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutAsistir(int id, Asistir asistir)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    if (id != asistir.idSocio)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    db.Entry(asistir).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!AsistirExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
 
         // POST: api/Asistirs
         [ResponseType(typeof(Asistir))]
@@ -106,9 +79,47 @@ namespace ChrysallisAPI.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = asistir.idSocio }, asistir);
         }
-         
 
-        // MODIFICADO:
+        // NEW UPDATE:
+        //  Creado método (copiando cabecera y body del método Delete) para poder actualizar
+        //  asistirs
+        [HttpPost]
+        [Route("api/Asistirs/update/{idSocio}/{idEvento}")]
+        public IHttpActionResult updateAsistir(int idSocio, short idEvento, Asistir asistir)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (idSocio != asistir.idSocio && idEvento != asistir.idEvento)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(asistir).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!asistirExiste(idSocio, idEvento))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+
+        // NEW DELETE:
         //  Creado método (copiando cabecera y body del método Delete) para poder eliminar
         //  asistirs
         [HttpPost]
@@ -133,6 +144,41 @@ namespace ChrysallisAPI.Controllers
 
             return Ok(asistir);
         }
+
+        //// PUT: api/Asistirs/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutAsistir(int id, Asistir asistir)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    if (id != asistir.idSocio)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    db.Entry(asistir).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!AsistirExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         //// DELETE: api/Asistirs/5
         //[ResponseType(typeof(Asistir))]
@@ -159,9 +205,14 @@ namespace ChrysallisAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AsistirExists(int id)
+        private bool asistirExiste(int idSocio, int idEvento)
         {
-            return db.Asistir.Count(e => e.idSocio == id) > 0;
+            return db.Asistir.Count(e => e.idSocio == idSocio && e.idEvento == idEvento) > 0;
         }
+
+        //private bool AsistirExists(int id)
+        //{
+        //    return db.Asistir.Count(e => e.idSocio == id) > 0;
+        //}
     }
 }

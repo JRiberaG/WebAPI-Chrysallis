@@ -85,40 +85,40 @@ namespace ChrysallisAPI.Controllers
             return resultado;
         }
 
-        // PUT: api/Comentarios/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutComentario(short id, Comentarios comentario)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/Comentarios/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutComentario(short id, Comentarios comentario)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != comentario.idEvento)
-            {
-                return BadRequest();
-            }
+        //    if (id != comentario.idEvento)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(comentario).State = EntityState.Modified;
+        //    db.Entry(comentario).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ComentarioExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!ComentarioExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/Comentarios
         [ResponseType(typeof(Comentarios))]
@@ -155,12 +155,6 @@ namespace ChrysallisAPI.Controllers
             return CreatedAtRoute("DefaultApi", new { id = comentario.idEvento }, comentario);
         }
 
-        // Método creado para reemplazar el que viene por defecto al crear la API
-        private bool comentarioExiste(int id, short idEvento)
-        {
-            return db.Comentarios.Count(c => c.id == id && c.idEvento == idEvento) > 0;
-        }
-
         // DELETE: api/Comentarios/5
         [ResponseType(typeof(Comentarios))]
         public IHttpActionResult DeleteComentario(short id)
@@ -186,9 +180,15 @@ namespace ChrysallisAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ComentarioExists(short id)
+        // Método creado para reemplazar el que viene por defecto al crear el controller
+        private bool comentarioExiste(int id, short idEvento)
         {
-            return db.Comentarios.Count(e => e.idEvento == id) > 0;
+            return db.Comentarios.Count(c => c.id == id && c.idEvento == idEvento) > 0;
         }
+
+        //private bool ComentarioExists(short id)
+        //{
+        //    return db.Comentarios.Count(e => e.idEvento == id) > 0;
+        //}
     }
 }
