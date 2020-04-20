@@ -149,10 +149,10 @@ namespace ChrysallisAPI.Controllers
 //            //return existe;
 //        }
 
-
-        // PUT: api/Socios/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutSocios(int id, Socios socios)
+        // NEW UPDATE:
+        [HttpPost]
+        [Route("api/Socios/update/{id}")]
+        public IHttpActionResult updateSocio(int id, Socios socios)
         {
             if (!ModelState.IsValid)
             {
@@ -184,6 +184,43 @@ namespace ChrysallisAPI.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+
+
+
+        //// PUT: api/Socios/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutSocios(int id, Socios socios)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    if (id != socios.id)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    db.Entry(socios).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!SociosExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
         /*
         // POST: api/Socios
         [ResponseType(typeof(Socios))]
