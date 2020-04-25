@@ -8,8 +8,6 @@
         <EntityTypeShape EntityType="ChrysallisModel.Administradores" Width="1.5" PointX="2" PointY="9.125" />
         <EntityTypeShape EntityType="ChrysallisModel.Asistir" Width="1.5" PointX="9.625" PointY="12.875" />
         <EntityTypeShape EntityType="ChrysallisModel.Comunidades" Width="1.5" PointX="3" PointY="13" />
-        <EntityTypeShape EntityType="ChrysallisModel.Documentos" Width="1.5" PointX="7.375" PointY="8.125" />
-        <EntityTypeShape EntityType="ChrysallisModel.Notificaciones" Width="1.5" PointX="7.5" PointY="12.875" />
         <EntityTypeShape EntityType="ChrysallisModel.Socios" Width="1.5" PointX="5.25" PointY="12.25" />
         <AssociationConnector Association="ChrysallisModel.FK_Asistir_Socios" />
         <AssociationConnector Association="ChrysallisModel.FK_Socios_Comunidad" />
@@ -19,11 +17,13 @@
         <AssociationConnector Association="ChrysallisModel.FK_Eventos_Administradores" />
         <AssociationConnector Association="ChrysallisModel.FK_Asistir_Eventos" />
         <AssociationConnector Association="ChrysallisModel.FK_Eventos_Comunidad" />
-        <AssociationConnector Association="ChrysallisModel.FK_Documentos_Eventos" />
-        <AssociationConnector Association="ChrysallisModel.FK_Notificaciones_Eventos" />
-        <EntityTypeShape EntityType="ChrysallisModel.Comentarios" Width="1.5" PointX="9" PointY="10" />
+        <EntityTypeShape EntityType="ChrysallisModel.Comentarios" Width="1.5" PointX="9" PointY="9.5" />
         <AssociationConnector Association="ChrysallisModel.FK_Comentario_Eventos" />
         <AssociationConnector Association="ChrysallisModel.FK_Comentario_Socios" />
+        <EntityTypeShape EntityType="ChrysallisModel.Notificaciones" Width="1.5" PointX="7.625" PointY="14" />
+        <AssociationConnector Association="ChrysallisModel.FK_Notificaciones_Eventos" />
+        <EntityTypeShape EntityType="ChrysallisModel.Documentos" Width="1.5" PointX="6.625" PointY="8.75" />
+        <AssociationConnector Association="ChrysallisModel.FK_Documentos_Eventos" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
