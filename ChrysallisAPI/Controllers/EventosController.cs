@@ -62,8 +62,8 @@ namespace ChrysallisAPI.Controllers
                .Include("Comunidades")
                .Include("Comentarios")
                .Include("Asistir")
-               .Include("Notificaciones")
-               .Include("Documentos")
+               //.Include("Notificaciones")
+               //.Include("Documentos")
                where e.id == id
                select e).FirstOrDefault();
 
